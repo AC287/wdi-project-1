@@ -1,12 +1,12 @@
 # Proposals
 
-### Proposal#1: word game
+### Proposal#1: Word game (Word Chain)
 
-### ~~Proposal#2: shooting game~~ ```DROPPED```
+### ~~Proposal#2: Shooting Game~~ ```DROPPED```
 
 ---
 
-### Proposal#1: Word game
+### Proposal#1: Word game (Word Chain)
 
 * This game revolves around words with two players.
  * Player 1 will start off a game with a word: 'apple'.
@@ -36,7 +36,7 @@
 Tested. Proposal#2 dropped.
 I was able to learn alittle bit on .animation() and .velocity().
 Insufficient time to research and learn animation() & velocity() for the project.
-Going forward with Proposal#1. 
+Going forward with Proposal#1.
 ```
 
 ---
