@@ -2,7 +2,7 @@
 
 ### Proposal#1: word game
 
-### Proposal#2: shooting game
+### ~~Proposal#2: shooting game~~ ```DROPPED```
 
 ---
 
@@ -20,16 +20,23 @@
  * Player can earn double points if the entered word for the corresponding player exceeded certain length.
 
 ---
-### Proposal#2: Shooting game.
+### ~~Proposal#2: Shooting game.~~
 
-* This is a one player shooting game.
- * An object of certain size will randomly float within a framed window.
- * Player will be using mouse to click on the floating object.
-* Conditions:
- * Clicking on the object will divide object into two smaller piece.
- * Player will need to click on the object until there are nothing left.
-* Winning conditions:
- * Player will win if the player completely clear the object.
- * Within given time frame: 30 seconds.
+* ~~This is a one player shooting game.~~
+ * ~~An object of certain size will randomly float within a framed window.~~
+ * ~~Player will be using mouse to click on the floating object.~~
+* ~~Conditions:~~
+ * ~~Clicking on the object will divide object into two smaller piece.~~
+ * ~~Player will need to click on the object until there are nothing left.~~
+* ~~Winning conditions:~~
+ * ~~Player will win if the player completely clear the object.~~
+ * ~~Within given time frame: 30 seconds.~~
+
+```
+Tested. Proposal#2 dropped.
+I was able to learn alittle bit on .animation() and .velocity().
+Insufficient time to research and learn animation() & velocity() for the project.
+Going forward with Proposal#1. 
+```
 
 ---
