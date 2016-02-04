@@ -38,8 +38,8 @@ function initial(){
 
 function mainGame(){
   countdown = setInterval(masterCountdown,1000);
-  $('.player1').html('<h3>'+player1+'</h3>');
-  $('.player2').html('<h3>'+player2+'</h3>');
+  $('.player1').html('<h2>'+player1+'</h2>');
+  $('.player2').html('<h2>'+player2+'</h2>');
   $('.mainBox').html('<h5>'+player1+', enter the first word to begin the game. Press "Enter" to submit. </h5>');
   $('.mainBox').append('<input type="text" id="words">');
   $('#words').keydown(function(e){
