@@ -12,7 +12,7 @@ body{
 }
 #header{
   font-family: 'Fredericka the Great', cursive;
-  font-size: 500px;
+  /*font-size: px;*/
   text-align: center;
   margin: 25px;
   padding: 10px;
@@ -23,15 +23,49 @@ body{
   margin: 0 auto;
   width: 1000px;
 }
-#midcol{
-  text-align: center;
+.outbox{
+  width: 100%;
+  /*position: relative;*/
+  margin: 0 auto;
   /*border: 1px solid black;*/
-  opacity: 0.5;
-  filter: alpha(opacity=50);
+  text-align: center;
+}
+#p1col{
+  width: 25%;
+  margin: 0 auto;
+  /*border: 1px solid black;*/
+  display: inline-block;
+  float: left;
+}
+#p2col{
+  width: 25%;
+  margin: 0 auto;
+  /*border: 1px solid black;*/
+  display: inline-block;
+  float: left;
+}
+#midcol{
+  width: 49.4%;
+  margin: 0 auto;
+  display: inline-block;
+  float: left;
+  /*border: 1px solid black;*/
+  /*text-align: center;*/
+  /*border: 1px solid black;*/
+  /*opacity: 0.5;*/
+  /*filter: alpha(opacity=50);*/
 }
 .player1{
   text-align: center;
 }
 .player2{
   text-align: center;
+}
+.gameover{
+  color: red;
+}
+.pWord{
+  text-align: center;
+  list-style-type: none;
+  font-size: large;
 }
