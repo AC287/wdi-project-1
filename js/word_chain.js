@@ -8,7 +8,7 @@ var player1 = '', player2 = '';
 var masterTime = 60, countdown, p1t=0, p2t=0, turn=0, word, lastLetter;
 var p1icon = '<img src="https://cdn2.iconfinder.com/data/icons/snipicons/500/hand-left-128.png"/>'; //player1 icon from iconfinder.com
 var p2icon = '<img src="https://cdn2.iconfinder.com/data/icons/snipicons/500/hand-right-128.png"/>'; //player2 icon from iconfinder.com
-var p1Archive = [], p2Archive = [];
+var pArchive = [];
 
 function clearField() {
   // $('#message').empty();
@@ -52,6 +52,7 @@ function mainGame(){
     word = $('#words').val();
     // console.log(word)
     if(e.keyCode===13){
+      pArchive.push(word);
       console.log(word);
       $('.p1Word').append('<li>'+word+'</li>');
       $('#words').val('');
@@ -83,6 +84,8 @@ function p2time(){ // player 2 timer
   p2t++;
 
 } // end player 2 timer.
+
+
 function turnSwitch(){
   var tempWord = '';
   if((turn%2)===0){
@@ -93,8 +96,9 @@ function turnSwitch(){
       word = $('#words').val();
       // console.log(word)
       if(e.keyCode===13){
-        console.log(word);
-        if(lastLetter === word[0]){
+        pArchive.push(word);
+        // console.log(word);
+        if(lastLetter === word[0] && isRepeat()===true){
           lastLetter = word[word.length-1];
           console.log(lastLetter);
           $('.p1Word').append('<li>'+word+'</li>');
@@ -105,22 +109,23 @@ function turnSwitch(){
         else {
           console.log(lastLetter)
           $('.mainBox').empty();
-          $('.mainBox').html('<h5>Your first letter doesn\'t match. Your turn will end.</h5>');
+          $('.mainBox').html('<h5>Invalid word. Your turn will end.</h5>');
           turn++;
-          setTimeout(turnSwitch,2000);
+          setTimeout(turnSwitch,500);
         };
       };
     });
   }
   else {
     $('.mainBox').html('<h5>'+ player2 +', enter a word that starts with the letter "'+ lastLetter +'"</h5>')
-    $('.mainBox').append('<input type="text" id="words" autofocus>');
+    $('.mainBox').append('<input type="text" id="words">');
     $('#words').focus();
     $('#words').keydown(function(e){
       word = $('#words').val();
       if(e.keyCode===13){
-        console.log(word);
-        if(lastLetter === word[0]){
+        pArchive.push(word);
+        // console.log(word);
+        if(lastLetter === word[0] && isRepeat()===true){
           lastLetter = word[word.length-1];
           console.log(lastLetter);
           $('.p2Word').append('<li>'+word+'</li>');
@@ -131,13 +136,23 @@ function turnSwitch(){
         else {
           console.log(lastLetter);
           $('.mainBox').empty();
-          $('.mainBox').html('<h5>Your first letter doesn\'t match. Your turn will end.</h5>');
+          $('.mainBox').html('<h5>Invalid word. Your turn will end.</h5>');
           turn++;
-          setTimeout(turnSwitch,2000);
+          setTimeout(turnSwitch,500);
         };
       };
     });
   };
+};
+
+function isRepeat(){ // check to see if word is already entered. If repeat, return false.
+  for(var i=0; i< (pArchive.length-1); i++){
+    if(pArchive[i]===pArchive[pArchive.length-1]){
+      return false;
+    }
+  }
+  return true;
+
 }
 
 // self note:
