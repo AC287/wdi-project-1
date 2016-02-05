@@ -5,7 +5,10 @@ $(document).ready(function(){
 
 });
 var player1 = '', player2 = '';
-var masterTime = 60, countdown, p1t=0, p2t=0, turn=0, word;
+var masterTime = 60, countdown, p1t=0, p2t=0, turn=0, word, lastLetter;
+var p1icon = '<img src="https://cdn2.iconfinder.com/data/icons/snipicons/500/hand-left-128.png"/>'; //player1 icon from iconfinder.com
+var p2icon = '<img src="https://cdn2.iconfinder.com/data/icons/snipicons/500/hand-right-128.png"/>'; //player2 icon from iconfinder.com
+var p1Archive = [], p2Archive = [];
 
 function clearField() {
   // $('#message').empty();
@@ -13,7 +16,7 @@ function clearField() {
   $('.p1Word').empty();
   $('.player2').empty();
   $('.p2Word').empty();
-  $('#midcol').empty();
+  // $('#midcol').empty();
 }
 
 function initial(){
@@ -30,7 +33,7 @@ function initial(){
     player2 = $('#p2').val();
     if(player2 ==='') player2 = 'Player 2'; // assign default name.
     $('#message').empty();
-    $('#message').html('<h5>Welcome ' + player1 + ' & ' + player2+'.</h5>');
+    $('#message').html('<h4>Welcome ' + player1 + ' & ' + player2+'.</h4>');
     setTimeout(mainGame,2000);
   });
 }
@@ -40,8 +43,11 @@ function mainGame(){
   countdown = setInterval(masterCountdown,1000);
   $('.player1').html('<h2>'+player1+'</h2>');
   $('.player2').html('<h2>'+player2+'</h2>');
+  // $('.mainBox').remove();
   $('.mainBox').html('<h5>'+player1+', enter the first word to begin the game. Press "Enter" to submit. </h5>');
-  $('.mainBox').append('<input type="text" id="words">');
+  $('.mainBox').append('<input type="text" id="words" autofocus>');
+  // $('.inputBox').html('<input type="text" id="words" autofocus>');
+
   $('#words').keydown(function(e){
     word = $('#words').val();
     // console.log(word)
@@ -49,6 +55,8 @@ function mainGame(){
       console.log(word);
       $('.p1Word').append('<li>'+word+'</li>');
       $('#words').val('');
+      lastLetter = word[word.length-1];
+      console.log(lastLetter);
       turn++;
       turnSwitch();
     }
@@ -59,7 +67,7 @@ function mainGame(){
 
 function masterCountdown(){ // masterCountdown
   masterTime--;
-  $('#message').html('<h2>' + masterTime + '</h2>')
+  $('#message').html('<h4>' + masterTime + '</h4>')
   if(masterTime === 0){
     clearInterval(countdown);
     $('#message').html('<h1 class="gameover">GAME OVER</h1>');
@@ -78,39 +86,63 @@ function p2time(){ // player 2 timer
 function turnSwitch(){
   var tempWord = '';
   if((turn%2)===0){
-    tempWord = ($('.p2Word li').eq(($('.p2Word li').length-1)).text());
-    $('.mainBox').html('<h5>'+ player1 +', enter a word that starts with the letter "'+ tempWord[tempWord.length-1]+'"</h5>');
+    $('.mainBox').html('<h5>'+ player1 +', enter a word that starts with the letter "'+ lastLetter +'"</h5>');
     $('.mainBox').append('<input type="text" id="words">');
+    $('#words').focus();
     $('#words').keydown(function(e){
       word = $('#words').val();
       // console.log(word)
       if(e.keyCode===13){
         console.log(word);
-        $('.p1Word').append('<li>'+word+'</li>');
-        $('#words').val('');
-        turn++;
-        turnSwitch();
-      }
-    })
+        if(lastLetter === word[0]){
+          lastLetter = word[word.length-1];
+          console.log(lastLetter);
+          $('.p1Word').append('<li>'+word+'</li>');
+          $('#words').val('');
+          turn++;
+          turnSwitch();
+        }
+        else {
+          console.log(lastLetter)
+          $('.mainBox').empty();
+          $('.mainBox').html('<h5>Your first letter doesn\'t match. Your turn will end.</h5>');
+          turn++;
+          setTimeout(turnSwitch,2000);
+        };
+      };
+    });
   }
   else {
-    tempWord = ($('.p1Word li').eq(($('.p1Word li').length-1)).text())
-    $('.mainBox').html('<h5>'+ player2 +', enter a word that starts with the letter "'+ tempWord[tempWord.length-1]+'"</h5>');
-    $('.mainBox').append('<input type="text" id="words">');
+    $('.mainBox').html('<h5>'+ player2 +', enter a word that starts with the letter "'+ lastLetter +'"</h5>')
+    $('.mainBox').append('<input type="text" id="words" autofocus>');
+    $('#words').focus();
     $('#words').keydown(function(e){
       word = $('#words').val();
-      // console.log(word)
       if(e.keyCode===13){
         console.log(word);
-        $('.p2Word').append('<li>'+word+'</li>');
-        $('#words').val('');
-        turn++;
-        turnSwitch();
-      }
-    })
-  }
+        if(lastLetter === word[0]){
+          lastLetter = word[word.length-1];
+          console.log(lastLetter);
+          $('.p2Word').append('<li>'+word+'</li>');
+          $('#words').val('');
+          turn++;
+          turnSwitch();
+        }
+        else {
+          console.log(lastLetter);
+          $('.mainBox').empty();
+          $('.mainBox').html('<h5>Your first letter doesn\'t match. Your turn will end.</h5>');
+          turn++;
+          setTimeout(turnSwitch,2000);
+        };
+      };
+    });
+  };
 }
 
 // self note:
 // find spiecific value at list position (index)
 // $('.p1Word li').eq(index).text();
+// $('.p1Word li').length;
+// empty() leave div and empty out the value.
+// remove() delete everything inside including inner node.
