@@ -5,7 +5,7 @@ $(document).ready(function(){
 
 });
 var player1 = '', player2 = '';
-var masterTime = 60, countdown, p1t=0, p2t=0, turn=0, word;
+var masterTime = 60, countdown, p1t=0, p2t=0, turn=0, word, lastLetter;
 
 function clearField() {
   // $('#message').empty();
@@ -13,7 +13,7 @@ function clearField() {
   $('.p1Word').empty();
   $('.player2').empty();
   $('.p2Word').empty();
-  $('#midcol').empty();
+  // $('#midcol').empty();
 }
 
 function initial(){
@@ -30,7 +30,7 @@ function initial(){
     player2 = $('#p2').val();
     if(player2 ==='') player2 = 'Player 2'; // assign default name.
     $('#message').empty();
-    $('#message').html('<h5>Welcome ' + player1 + ' & ' + player2+'.</h5>');
+    $('#message').html('<h4>Welcome ' + player1 + ' & ' + player2+'.</h4>');
     setTimeout(mainGame,2000);
   });
 }
@@ -50,7 +50,7 @@ function mainGame(){
       $('.p1Word').append('<li>'+word+'</li>');
       $('#words').val('');
       turn++;
-      turnSwitch();
+      turnSwitch(word[word.length-1]);
     }
   })
   // console.log(word);
@@ -59,7 +59,7 @@ function mainGame(){
 
 function masterCountdown(){ // masterCountdown
   masterTime--;
-  $('#message').html('<h2>' + masterTime + '</h2>')
+  $('#message').html('<h4>' + masterTime + '</h4>')
   if(masterTime === 0){
     clearInterval(countdown);
     $('#message').html('<h1 class="gameover">GAME OVER</h1>');
@@ -86,10 +86,18 @@ function turnSwitch(){
       // console.log(word)
       if(e.keyCode===13){
         console.log(word);
-        $('.p1Word').append('<li>'+word+'</li>');
-        $('#words').val('');
-        turn++;
-        turnSwitch();
+        if(rule(tempWord,word)){
+          $('.p1Word').append('<li>'+word+'</li>');
+          $('#words').val('');
+          turn++;
+          turnSwitch();
+        }
+        else {
+          $('.mainBox').empty();
+          $('.mainBox').html('<h5>Your first letter doesn\'t match. Your turn will end.</h5>');
+          turn++;
+          setTimeout(turnSwitch,2000);
+        }
       }
     })
   }
@@ -102,12 +110,29 @@ function turnSwitch(){
       // console.log(word)
       if(e.keyCode===13){
         console.log(word);
-        $('.p2Word').append('<li>'+word+'</li>');
-        $('#words').val('');
-        turn++;
-        turnSwitch();
+        if(rule(tempWord,word)){
+          $('.p2Word').append('<li>'+word+'</li>');
+          $('#words').val('');
+          turn++;
+          turnSwitch();
+        }
+        else {
+          $('.mainBox').empty();
+          $('.mainBox').html('<h5>Your first letter doesn\'t match. Your turn will end.</h5>');
+          turn++;
+          setTimeout(turnSwitch,2000);
+        }
       }
     })
+  }
+}
+
+function rule(i,j){ // i is previous last letter. J is first letter of new word.
+  if(i === j[0]) {
+    return true;
+  }
+  else {
+    return false;
   }
 }
 
