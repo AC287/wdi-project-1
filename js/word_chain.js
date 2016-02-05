@@ -52,6 +52,7 @@ function mainGame(){
     word = $('#words').val();
     // console.log(word)
     if(e.keyCode===13){
+      word = word.toLowerCase();
       pArchive.push(word);
       console.log(word);
       $('.p1Word').append('<li>'+word+'</li>');
@@ -96,6 +97,7 @@ function turnSwitch(){
       word = $('#words').val();
       // console.log(word)
       if(e.keyCode===13){
+        word = word.toLowerCase();
         pArchive.push(word);
         // console.log(word);
         if(lastLetter === word[0] && isRepeat()===true){
@@ -111,7 +113,7 @@ function turnSwitch(){
           $('.mainBox').empty();
           $('.mainBox').html('<h5>Invalid word. Your turn will end.</h5>');
           turn++;
-          setTimeout(turnSwitch,500);
+          setTimeout(turnSwitch,1000);
         };
       };
     });
@@ -123,6 +125,7 @@ function turnSwitch(){
     $('#words').keydown(function(e){
       word = $('#words').val();
       if(e.keyCode===13){
+        word = word.toLowerCase();
         pArchive.push(word);
         // console.log(word);
         if(lastLetter === word[0] && isRepeat()===true){
@@ -138,7 +141,7 @@ function turnSwitch(){
           $('.mainBox').empty();
           $('.mainBox').html('<h5>Invalid word. Your turn will end.</h5>');
           turn++;
-          setTimeout(turnSwitch,500);
+          setTimeout(turnSwitch,1000);
         };
       };
     });
