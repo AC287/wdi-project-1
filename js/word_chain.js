@@ -13,9 +13,10 @@ var pArchive = [];
 function clearField() {
   // $('#message').empty();
   $('.player1').empty();
-  $('.p1Word').empty();
+  $('.p1Word li').remove();
   $('.player2').empty();
-  $('.p2Word').empty();
+  $('.p2Word li').remove();
+  $('input').remove();
   // $('#midcol').empty();
 }
 
@@ -41,10 +42,10 @@ function initial(){
 
 function mainGame(){
   countdown = setInterval(masterCountdown,1000);
-  $('.player1').html('<h2>'+player1+'</h2>');
-  $('.player2').html('<h2>'+player2+'</h2>');
+  $('.player1').html('<h2><u>'+player1+'</u></h2>');
+  $('.player2').html('<h2><u>'+player2+'</u></h2>');
   // $('.mainBox').remove();
-  $('.mainBox').html('<h5>'+player1+', enter the first word to begin the game. Press "Enter" to submit. </h5>');
+  $('.mainBox').html('<h5>'+p1icon+'<br>Enter the first word to begin the game. Press "Enter" to submit. </h5>');
   $('.mainBox').append('<input type="text" id="words" autofocus>');
   // $('.inputBox').html('<input type="text" id="words" autofocus>');
 
@@ -73,6 +74,20 @@ function masterCountdown(){ // masterCountdown
   if(masterTime === 0){
     clearInterval(countdown);
     $('#message').html('<h1 class="gameover">GAME OVER</h1>');
+    // $('#message .gameover').animate({
+    //   font-size: "60rem"
+    // },1500);
+    $('input').remove();
+    $('.mainBox').empty();
+    var finalScore = winner();
+    var wInner;
+    if(finalScore[0]===finalScore[1]){ wInner = 'None. The result is tie';}
+    else if(finalScore[0] > finalScore[1]){ wInner = player1;}
+    else { wInner = player2;}
+    setTimeout(function(){
+      // clearField();
+      $('.mainBox').html('<h3> Winner is: ' + wInner + '!<br>'+player1+'\'s score is ' + finalScore[0] + '<br>'+player2+'\'s score is '+ finalScore[1]);
+    },2000)
   }
 } // end masterCountdown
 
@@ -90,7 +105,7 @@ function p2time(){ // player 2 timer
 function turnSwitch(){
   var tempWord = '';
   if((turn%2)===0){
-    $('.mainBox').html('<h5>'+ player1 +', enter a word that starts with the letter "'+ lastLetter +'"</h5>');
+    $('.mainBox').html('<h5>'+ p1icon +'<br>Word that begins with "'+ lastLetter +'"</h5>');
     $('.mainBox').append('<input type="text" id="words">');
     $('#words').focus();
     $('#words').keydown(function(e){
@@ -102,7 +117,7 @@ function turnSwitch(){
         // console.log(word);
         if(lastLetter === word[0] && isRepeat()===true){
           lastLetter = word[word.length-1];
-          console.log(lastLetter);
+          // console.log(lastLetter);
           $('.p1Word').append('<li>'+word+'</li>');
           $('#words').val('');
           turn++;
@@ -119,7 +134,7 @@ function turnSwitch(){
     });
   }
   else {
-    $('.mainBox').html('<h5>'+ player2 +', enter a word that starts with the letter "'+ lastLetter +'"</h5>')
+    $('.mainBox').html('<h5>'+ p2icon +'<br>Word that begins with "'+ lastLetter +'"</h5>')
     $('.mainBox').append('<input type="text" id="words">');
     $('#words').focus();
     $('#words').keydown(function(e){
@@ -155,8 +170,23 @@ function isRepeat(){ // check to see if word is already entered. If repeat, retu
     }
   }
   return true;
+}// end isRepeat
 
-}
+function winner(){ // determine winstate.
+  var p1S = $('.p1Word li').length;
+  var p2S = $('.p2Word li').length;
+  for(var i=0; i<($('.p1Word li').length-1); i++) {
+    if(($('.p1Word li').eq(i).text().length)>=10){
+      p1S = p1S + 1;
+    }
+  };
+  for(var j=0; j<($('.p2Word li').length-1); j++) {
+    if(($('.p2Word li').eq(j).text().length)>=10){
+      p2S = p2S + 1;
+    }
+  }
+  return [p1S,p2S];
+}; // end winner
 
 // self note:
 // find spiecific value at list position (index)
