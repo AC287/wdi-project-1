@@ -9,12 +9,12 @@ body{
 }
 #message{
   text-align: center;
-  font-family: 'Fredericka the Great',cursive;
+  font-family: 'Bangers',cursive;
   margin: 15px;
   padding: 5px;
 }
 #header{
-  font-family: 'Fredericka the Great', cursive;
+  font-family: 'Bangers', cursive;
   /*font-size: px;*/
   text-align: center;
   margin: 25px;
@@ -22,7 +22,7 @@ body{
 
 }
 #content{
-  font-family: 'Fredericka the Great', cursive;
+  font-family: 'Bangers', cursive;
   margin: 0 auto;
   width: 1000px;
 }
@@ -58,6 +58,13 @@ body{
   /*opacity: 0.5;*/
   /*filter: alpha(opacity=50);*/
 }
+.p1{
+  margin: 2px;
+}
+.p2{
+  margin: 2px;
+}
+
 .player1{
   text-align: center;
 }
