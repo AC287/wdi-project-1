@@ -1,6 +1,5 @@
 /*Style Sheet for Word Chain*/
 
-@import url(https://fonts.googleapis.com/css?family=Fredericka+the+Great);
 @import url(https://fonts.googleapis.com/css?family=Bangers);
 
 body{
@@ -12,14 +11,27 @@ body{
   margin: 15px;
   padding: 5px;
 }
+
 #header{
   font-family: 'Bangers', cursive;
-  /*font-size: px;*/
   text-align: center;
   margin: 25px;
   padding: 10px;
-
 }
+
+.headMenu{
+  list-style: none;
+}
+
+.headMenu li{
+  display: inline-block;
+  padding: 0.5em 5em;
+}
+
+.menu{
+  display: inline-block;
+}
+
 #content{
   font-family: 'Bangers', cursive;
   margin: 0 auto;
@@ -77,4 +89,7 @@ body{
   text-align: center;
   list-style-type: none;
   font-size: large;
+}
+.howtoPopup{
+  display: none;
 }

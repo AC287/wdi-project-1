@@ -1,7 +1,44 @@
 $(document).ready(function(){
   console.log('loaded');
+
+  $(function(){ //dialog box using jquery-ui plugin.
+    $('.howtoPopup').dialog({
+      autoOpen: false,
+      show:{
+        effect: "fade",
+        duration: 1000
+      },
+      hide:{
+        effect: "fade",
+        duration: 1000
+      }
+    });
+    $('.howto').click(function(){
+      $('.howtoPopup').dialog('open');
+      // return false;
+    });
+
+  });
+
+  $(function(){ //dialog box using jquery-ui plugin.
+    $('.acknowledgementPopup').dialog({
+      autoOpen: false,
+      show:{
+        effect: "fade",
+        duration: 1000
+      },
+      hide:{
+        effect: "fade",
+        duration: 1000
+      }
+    });
+    $('.acknowledgement').click(function(){
+      $('.acknowledgementPopup').dialog('open');
+    });
+  });
+
   clearField();
-  $('button').click(initial); // begin game.
+  $('.start').click(initial); // begin game.
 
 });
 var player1 = '', player2 = '';
@@ -10,19 +47,18 @@ var p1icon = '<img src="https://cdn2.iconfinder.com/data/icons/snipicons/500/han
 var p2icon = '<img src="https://cdn2.iconfinder.com/data/icons/snipicons/500/hand-right-128.png"/>'; //player2 icon from iconfinder.com
 var pArchive = [];
 
-function clearField() {
-  // $('#message').empty();
+function clearField() { //Clear out everything.
   $('.player1').empty();
   $('.p1Word li').remove();
   $('.player2').empty();
   $('.p2Word li').remove();
   $('input').remove();
-  // $('#midcol').empty();
+  $('.mainBox').empty();
 }
 
 function initial(){
   $('#message').empty();
-  // clearField();
+  clearField();
   $('#message').html('<h5>Enter your names. Player 1 will go first.</h5>');
   $('#message').append('<div class="container"><div class="row"></div></div>');
   $('#message .container .row').append('<div class="six columns"><input type="text" id="p1" placeholder="Player 1"></div>')
@@ -39,7 +75,6 @@ function initial(){
   });
 }
 
-
 function mainGame(){
   countdown = setInterval(masterCountdown,1000);
   $('.player1').html('<h2><u>'+player1+'</u></h2>');
@@ -51,22 +86,17 @@ function mainGame(){
 
   $('#words').keydown(function(e){
     word = $('#words').val();
-    // console.log(word)
     if(e.keyCode===13){
       word = word.toLowerCase();
       pArchive.push(word);
-      console.log(word);
       $('.p1Word').append('<li>'+word+'</li>');
       $('#words').val('');
       lastLetter = word[word.length-1];
-      console.log(lastLetter);
       turn++;
       turnSwitch();
-    }
-  })
-  // console.log(word);
-
-}
+    };
+  });
+};
 
 function masterCountdown(){ // masterCountdown
   masterTime--;
@@ -74,9 +104,7 @@ function masterCountdown(){ // masterCountdown
   if(masterTime === 0){
     clearInterval(countdown);
     $('#message').html('<h1 class="gameover">GAME OVER</h1>');
-    // $('#message .gameover').animate({
-    //   font-size: "60rem"
-    // },1500);
+    $('.gameover').effect("bounce","slow");
     $('input').remove();
     $('.mainBox').empty();
     var finalScore = winner();
@@ -86,45 +114,32 @@ function masterCountdown(){ // masterCountdown
     else { wInner = player2;}
     setTimeout(function(){
       // clearField();
-      $('.mainBox').html('<h3> Winner is: ' + wInner + '!<br>'+player1+'\'s score is ' + finalScore[0] + '<br>'+player2+'\'s score is '+ finalScore[1]);
+      $('.mainBox').html('<h3> Winner is: ' + wInner + '!<br><br>'+player1+'\'s score is ' + finalScore[0] + '<br>'+player2+'\'s score is '+ finalScore[1] + '<br><br>');1
+      $('.mainBox').append('<button id="again">Again?</button>');
+      $('#again').click(initial);
     },2000)
-  }
-} // end masterCountdown
+  };
+}; // end masterCountdown
 
-function p1time(){ // player 1 timer
-  p1t++;
-
-} // end player 1 timer.
-
-function p2time(){ // player 2 timer
-  p2t++;
-
-} // end player 2 timer.
-
-
-function turnSwitch(){
+function turnSwitch(){ //turn switch between player.
   var tempWord = '';
-  if((turn%2)===0){
+  if((turn%2)===0){ // player 1 is 0
     $('.mainBox').html('<h5>'+ p1icon +'<br>Word that begins with "'+ lastLetter +'"</h5>');
     $('.mainBox').append('<input type="text" id="words">');
-    $('#words').focus();
+    $('#words').focus(); //auto prompt for input.
     $('#words').keydown(function(e){
       word = $('#words').val();
-      // console.log(word)
       if(e.keyCode===13){
-        word = word.toLowerCase();
-        pArchive.push(word);
-        // console.log(word);
+        word = word.toLowerCase(); // convert everything to lower case.
+        pArchive.push(word); // archive all words.
         if(lastLetter === word[0] && isRepeat()===true){
           lastLetter = word[word.length-1];
-          // console.log(lastLetter);
           $('.p1Word').append('<li>'+word+'</li>');
           $('#words').val('');
           turn++;
           turnSwitch();
         }
         else {
-          console.log(lastLetter)
           $('.mainBox').empty();
           $('.mainBox').html('<h5>Invalid word. Your turn will end.</h5>');
           turn++;
@@ -133,7 +148,7 @@ function turnSwitch(){
       };
     });
   }
-  else {
+  else { //player 2's turn.
     $('.mainBox').html('<h5>'+ p2icon +'<br>Word that begins with "'+ lastLetter +'"</h5>')
     $('.mainBox').append('<input type="text" id="words">');
     $('#words').focus();
@@ -142,17 +157,14 @@ function turnSwitch(){
       if(e.keyCode===13){
         word = word.toLowerCase();
         pArchive.push(word);
-        // console.log(word);
         if(lastLetter === word[0] && isRepeat()===true){
           lastLetter = word[word.length-1];
-          console.log(lastLetter);
           $('.p2Word').append('<li>'+word+'</li>');
           $('#words').val('');
           turn++;
           turnSwitch();
         }
         else {
-          console.log(lastLetter);
           $('.mainBox').empty();
           $('.mainBox').html('<h5>Invalid word. Your turn will end.</h5>');
           turn++;
@@ -194,3 +206,5 @@ function winner(){ // determine winstate.
 // $('.p1Word li').length;
 // empty() leave div and empty out the value.
 // remove() delete everything inside including inner node.
+// use dialog method for howto and acknowledgement.
+// research on modal
