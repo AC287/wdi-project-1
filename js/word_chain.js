@@ -1,7 +1,27 @@
 $(document).ready(function(){
   console.log('loaded');
+
+  $(function(){
+    $('#dialog').dialog({
+      autoOpen: false,
+      show:{
+        effect: "fade",
+        duration: 1000
+      },
+      hide:{
+        effect: "fade",
+        duration: 1000
+      }
+    });
+    $('.howtoPopup').click(function(){
+      $('.howtoPopup').dialog('open');
+      // return false;
+    });
+  });
+
   clearField();
-  $('button').click(initial); // begin game.
+  $('.start').click(initial); // begin game.
+
 
 });
 var player1 = '', player2 = '';
@@ -194,3 +214,5 @@ function winner(){ // determine winstate.
 // $('.p1Word li').length;
 // empty() leave div and empty out the value.
 // remove() delete everything inside including inner node.
+// use dialog method for howto and acknowledgement.
+// research on modal

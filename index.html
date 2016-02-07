@@ -14,6 +14,14 @@
     <div id="content">
       <div id="header">
         <h1><u>WORD CHAIN</u></h1>
+        <nav class="twelve columns">
+          <ul class="headMenu">
+            <!-- <li class="home"><h3>home</h3></li> -->
+            <li class="howto"><h3>How to</h3>
+            </li>
+            <li class="acknowledgement"><h3>Acknowledgement</h3></li>
+          </ul>
+
       </div>
       <div class="outbox">
           <div class="p1box" id="p1col">
@@ -26,7 +34,7 @@
               <h5>Welcome.
                 <br> Press ' START ' to begin a new game.
               </h5>
-              <button type="button" name="start">START</button>
+              <button type="button" name="start" class="start">START</button>
             </div>
             <div class="mainBox">
             </div>
@@ -40,6 +48,16 @@
           </div>
 
       </div>
-
+      <div id="dialog" title="How to" class="howtoPopup">
+        <ul>
+          <li>Required two players.</li>
+          <li>Player 1 will start the game by entering the word.</li>
+          <li>Player 2 will follow by entering the word beginning with the last letter of player 1's word.</li>
+          <li>You have 60 seconds until the game end.</li>
+          <li>Your turn will end if you entered the word that is already entered or your word did not start with a set letter.</li>
+          <li>Player will score one point for each word entered.</li>
+          <li>Player will score double points for words with 10 or more letters.</li>
+        </ul>
+      </div>
   </body>
 </html>
