@@ -5,7 +5,9 @@
     <title>Word Chain</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="jquery-ui/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-2.2.0.js"></script>
+    <script src="jquery-ui/jquery-ui.js"></script>
     <script src="js/word_chain.js">
 
     </script>
@@ -14,6 +16,12 @@
     <div id="content">
       <div id="header">
         <h1><u>WORD CHAIN</u></h1>
+        <nav class="twelve columns">
+          <ul class="headMenu">
+            <li class="howto"><h3>How to</h3></li>
+            <li class="acknowledgement"><h3>Acknowledgement</h3></li>
+          </ul>
+
       </div>
       <div class="outbox">
           <div class="p1box" id="p1col">
@@ -26,12 +34,10 @@
               <h5>Welcome.
                 <br> Press ' START ' to begin a new game.
               </h5>
-              <button type="button" name="start">START</button>
+              <button type="button" name="start" class="start">START</button>
             </div>
             <div class="mainBox">
             </div>
-            <!-- <div class="inputBox">
-            </div> -->
           </div>
 
           <div class="p2box" id="p2col">
@@ -40,6 +46,31 @@
           </div>
 
       </div>
-
+      <div id="dialog" title="How to" class="howtoPopup" width="$(window).width()">
+        <ul>
+          <li>Required two players.</li>
+          <li>Player 1 will start the game by entering a word.</li>
+          <li>Player 2 will follow by entering a word beginning with the last letter of player 1's word.</li>
+          <li>You both have 30 seconds until the game end.</li>
+          <li>Your turn will end if you entered a word that is already entered or your word did not start with a set letter.</li>
+          <li>Player will score one point for each word entered.</li>
+          <li>Player will score double points for words with 10 or more letters.</li>
+        </ul>
+      </div>
+      <div id="dialog" title="Acknowledgement" class="acknowledgementPopup">
+        <ul>
+          Special thanks to...
+          <li>Vernon Adams at fonts.googleapis.com for font.</li>
+          <li>Subtlepatterns2015 for background.</li>
+          <li>api.jqueryui.com for dialog box plug-in.</li>
+          <li>cdn2.iconfinder.com for left/right icons.</li>
+          <li>Loanbot homework for input and log example.</li>
+          <li>Colin's suggestion about autofocus on text input box.</li>
+          <li>examples from w3schools.com; stackoverflow.com; and Mozilla Developer Network.</li>
+        </ul>
+        This game is very losely based on a game played in an anime called "No Game No Life".<br>
+        <iframe width="275" height="200" src="https://www.youtube.com/embed/MBEEeB_uoZ4?list=FLc__7Lv4dQ3ele-_lA8qxaQ" frameborder="0" allowfullscreen></iframe><br>
+        Visit <a href="http://www.crunchyroll.com/no-game-no-life">Crunchyroll</a> for more episodes.
+      </div>
   </body>
 </html>

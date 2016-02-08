@@ -1,7 +1,6 @@
 
 /*Style Sheet for Word Chain*/
 
-@import url(https://fonts.googleapis.com/css?family=Fredericka+the+Great);
 @import url(https://fonts.googleapis.com/css?family=Bangers);
 
 body{
@@ -13,14 +12,27 @@ body{
   margin: 15px;
   padding: 5px;
 }
+
 #header{
   font-family: 'Bangers', cursive;
-  /*font-size: px;*/
   text-align: center;
   margin: 25px;
   padding: 10px;
-
 }
+
+.headMenu{
+  list-style: none;
+}
+
+.headMenu li{
+  display: inline-block;
+  padding: 0.5em 5em;
+}
+
+.menu{
+  display: inline-block;
+}
+
 #content{
   font-family: 'Bangers', cursive;
   margin: 0 auto;
@@ -28,22 +40,18 @@ body{
 }
 .outbox{
   width: 100%;
-  /*position: relative;*/
   margin: 0 auto;
-  /*border: 1px solid black;*/
   text-align: center;
 }
 #p1col{
   width: 25%;
   margin: 0 auto;
-  /*border: 1px solid black;*/
   display: inline-block;
   float: left;
 }
 #p2col{
   width: 25%;
   margin: 0 auto;
-  /*border: 1px solid black;*/
   display: inline-block;
   float: left;
 }
@@ -52,11 +60,6 @@ body{
   margin: 0 auto;
   display: inline-block;
   float: left;
-  /*border: 1px solid black;*/
-  /*text-align: center;*/
-  /*border: 1px solid black;*/
-  /*opacity: 0.5;*/
-  /*filter: alpha(opacity=50);*/
 }
 .p1{
   margin: 2px;
