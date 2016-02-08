@@ -12,12 +12,14 @@
  * Player 1 will start off a game with a word: 'apple'.
  * Player 2 will then enter a word beginning with the last letter of player 1's last word: 'elephant'.
 * Conditions:
- * Each player will have to enter a word within 3 seconds.
- * The game will end after 60 seconds.
+ * ~~Each player will have to enter a word within 3 seconds.~~ ```Did not have time to implement this feature.```
+ * The game will end after ~~60~~ 30seconds.```60 seconds is too long.```
  * Players are not allow to repeat word.
 * Winning conditions:
- * System will perform a spell check after the game end and will count how many words player entered correctly.
+ * ~~System will perform a spell check after the game end and will count how many words player entered correctly.~~ ```Unable to implement spellcheck function.```
+ * Player will earn one point for each word that is successfully entered.
  * Player can earn double points if the entered word for the corresponding player exceeded certain length.
+ * Player with more points is the winner.
 
 ---
 ### ~~Proposal#2: Shooting game.~~
